@@ -1,0 +1,34 @@
+{
+  "name": "karma-censeo",
+  "version": "0.0.1",
+  "description": "A karma plugin for censeo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dereke/karma-censeo"
+  },
+  "keywords": [
+    "karma",
+    "karma-plugin",
+    "censeo",
+    "test"
+  ],
+  "author": "Derek Ekins",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dereke/karma-censeo/issues"
+  },
+  "homepage": "https://github.com/dereke/karma-censeo",
+  "dependencies": {
+    "censeo": "^0.4.5",
+    "get-port": "^1.0.0",
+    "reqwest": "^1.1.5"
+  },
+  "devDependencies": {
+    "bluebird": "^2.3.11",
+    "pogo": "^0.9.6"
+  }
+}
