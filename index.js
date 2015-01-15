@@ -12,7 +12,7 @@
         });
     };
     var self = this;
-    var censeo, getPort, karmaStart;
+    var censeo, getPort, karmaStart, clientCache;
     censeo = require("censeo");
     getPort = require("get-port");
     karmaStart = function(webServer) {
@@ -37,20 +37,31 @@
         });
     };
     karmaStart.$inject = [ "webServer" ];
+    clientCache = void 0;
     module.exports = {
         "framework:censeo": [ "factory", karmaStart ],
         client: function() {
             var self = this;
-            var request, gen5_asyncResult, censeoPort, gen6_asyncResult;
+            var gen5_asyncResult, request, censeoPort;
             return new Promise(function(gen3_onFulfilled) {
-                request = require("reqwest");
-                gen3_onFulfilled(Promise.resolve(request({
-                    url: "/censeo"
-                })).then(function(gen5_asyncResult) {
-                    censeoPort = gen5_asyncResult;
-                    console.log("Client configured to use censeo on port " + censeoPort);
-                    return Promise.resolve(censeo.client(censeoPort));
-                }));
+                gen3_onFulfilled(Promise.resolve(function() {
+                    if (clientCache) {
+                        return clientCache;
+                    } else {
+                        return new Promise(function(gen3_onFulfilled) {
+                            request = require("reqwest");
+                            gen3_onFulfilled(Promise.resolve(request({
+                                url: "/censeo"
+                            })).then(function(gen6_asyncResult) {
+                                censeoPort = gen6_asyncResult;
+                                console.log("Client configured to use censeo on port " + censeoPort);
+                                return Promise.resolve(censeo.client(censeoPort)).then(function(gen7_asyncResult) {
+                                    return clientCache = gen7_asyncResult;
+                                });
+                            }));
+                        });
+                    }
+                }()));
             });
         }
     };

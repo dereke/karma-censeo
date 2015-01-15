@@ -13,11 +13,16 @@ karmaStart(webServer)=
 
 karmaStart.$inject = ['webServer']
 
+clientCache = nil
+
 module.exports = {
   'framework:censeo' = [ 'factory', karmaStart]
   client()=
-    request = require 'reqwest'
-    censeoPort = request!({url = '/censeo'})                                                                                              
-    console.log("Client configured to use censeo on port #(censeoPort)")
-    censeo.client!(censeoPort)
+    if (clientCache)
+      clientCache
+    else
+      request = require 'reqwest'
+      censeoPort = request!({url = '/censeo'})                                                                                              
+      console.log("Client configured to use censeo on port #(censeoPort)")
+      clientCache := censeo.client!(censeoPort)
 }
