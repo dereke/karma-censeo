@@ -1,6 +1,6 @@
 {
   "name": "karma-censeo",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A karma plugin for censeo",
   "main": "index.js",
   "scripts": {
